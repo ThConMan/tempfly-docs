@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="TempFly">
+  <defs>
+    <linearGradient id="tf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9BE7FF"/>
+      <stop offset="0.5" stop-color="#55DDFF"/>
+      <stop offset="1" stop-color="#5588FF"/>
+    </linearGradient>
+    <linearGradient id="tf2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#55DDFF"/>
+      <stop offset="1" stop-color="#5588FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="124" height="124" rx="28" fill="#101824"/>
+  <rect x="2.5" y="2.5" width="123" height="123" rx="27.5" fill="none" stroke="url(#tf)" stroke-opacity="0.5" stroke-width="1.5"/>
+  <!-- paper plane -->
+  <path d="M104 32 L24 62 L54 72 L64 100 Z" fill="url(#tf)"/>
+  <path d="M104 32 L54 72 L64 100 Z" fill="url(#tf2)" fill-opacity="0.65"/>
+  <path d="M104 32 L54 72" fill="none" stroke="#04121d" stroke-opacity="0.35" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- speed/flight lines -->
+  <path d="M20 86 L40 86" stroke="#9BE7FF" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M26 100 L50 100" stroke="#55DDFF" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+</svg>

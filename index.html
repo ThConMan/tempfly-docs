@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempFly — Flight that only burns while you fly</title>
+    <meta name="description" content="TempFly is a Paper plugin that grants temporary flight which drains only while you're airborne. Hand out HMAC-signed Fly Vouchers, store balances in SQLite, and stop paying for time spent standing still.">
+    <link rel="icon" href="logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tempfly.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="nav-logo"><a href="index.html" style="color:inherit;">Temp<span>Fly</span></a></div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="docs.html">Docs</a></li>
+        </ul>
+        <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div style="height: 4rem;"></div>
+
+<!-- Hero -->
+<section class="plugin-hero">
+    <img src="logo.svg" alt="TempFly" class="plugin-hero-logo">
+    <h1>TempFly</h1>
+    <p class="tagline">Temporary flight that only burns time while you're actually airborne. Hand out Fly Vouchers and stop paying for time spent standing still.</p>
+    <div class="plugin-hero-meta">
+        <span class="hero-badge">Paper 26.1+</span>
+        <span class="hero-badge">Java 21+</span>
+        <span class="hero-badge">Free — closed source</span>
+    </div>
+    <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Get it
+        </a>
+        <a href="docs.html" class="btn btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Documentation
+        </a>
+    </div>
+</section>
+
+<!-- The idea -->
+<section class="section">
+    <h2 class="section-title">The idea</h2>
+    <p class="section-subtitle">Give players temporary flight without paying for time they spend parked.</p>
+    <p style="max-width:680px;margin:0 auto 2.5rem;text-align:center;color:var(--text-muted);line-height:1.8;">
+        Most "temp fly" setups bleed time the whole time it's on — even while a player stands in their base sorting chests. TempFly only counts down <strong>while you're actually in the air</strong>. Land or stand still and the timer pauses. Time is granted with <strong>Fly Vouchers</strong> — feather items players right-click to top up their balance — so flight becomes a real, tradeable reward instead of a flat permission.
+    </p>
+</section>
+
+<!-- How it works -->
+<section class="section">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-subtitle">Pay for air time, not idle time.</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+            <h3>Airborne-only drain</h3>
+            <p>Time counts down only while you're flying. Land or stand still and the timer pauses instantly — no more bleeding minutes parked in your base.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>Live countdown</h3>
+            <p>A live action-bar countdown shows exactly how much flight time you have left, shifting green &rarr; yellow &rarr; red as it runs low so a landing is never a surprise.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 3c-7 0-12 4-15 11l-3 7 7-3C17 15 21 10 21 3z"/><path d="M3 21l6-6"/></svg></div>
+            <h3>Fly Vouchers</h3>
+            <p>Hand out time as feather items (fully configurable) that grant flight on right-click. Each voucher is HMAC-signed, so it can't be forged, duped, or hand-crafted.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></div>
+            <h3>Persistence</h3>
+            <p>Balances are stored in SQLite and survive restarts. Log off mid-air and your flight is restored right where you left it the next time you join.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Fall grace</h3>
+            <p>When flight runs out, you get a few seconds of fall-damage immunity to glide down safely — no splatting the moment your time expires.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="8" y1="11" x2="16" y2="11"/></svg></div>
+            <h3>WorldGuard regions</h3>
+            <p>A <span class="mono">temp-fly</span> region flag lets you forbid temporary flight inside specific regions — spawn, arenas, events — while players keep their banked time for everywhere else.</p>
+        </div>
+    </div>
+</section>
+
+<!-- How it plays out -->
+<section class="section">
+    <h2 class="section-title">How it plays out</h2>
+    <p class="section-subtitle">A simple loop that rewards flying, not idling.</p>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Earn a voucher</h3>
+            <p>Pick up a Fly Voucher from a crate, shop, reward, or staff hand-out and right-click it to bank the time.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Take off</h3>
+            <p>Run <span class="mono">/tempfly</span> to toggle flight. The action bar shows your remaining time, counting down only while you're airborne.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Land &amp; bank the rest</h3>
+            <p>Touch down and the timer pauses. Your leftover time is saved for next time — and you glide safely if it ever runs out mid-air.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Works with -->
+<section class="section">
+    <h2 class="section-title">Plays nice with your stack</h2>
+    <p class="section-subtitle">Optional hooks — TempFly runs fine on a bare server too.</p>
+    <div class="compat-grid">
+        <div class="compat-item"><div class="compat-name">WorldGuard</div><div class="compat-desc">Adds a <span class="mono">temp-fly</span> region flag to forbid flight in chosen regions.</div></div>
+        <div class="compat-item"><div class="compat-name">SQLite</div><div class="compat-desc">Built-in, file-based storage — no database server to run.</div></div>
+        <div class="compat-item"><div class="compat-name">Any crate / reward plugin</div><div class="compat-desc">Hand out Fly Vouchers via <span class="mono">/tempfly give</span> from console.</div></div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+    <div class="cta-card">
+        <h2 class="section-title">Drop it in and take off</h2>
+        <p class="section-subtitle">Sensible defaults out of the box — vouchers, drain, and regions all configurable.</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary">Get it</a>
+            <a href="docs.html" class="btn btn-outline">Read the docs</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <p>&copy; ThConMan &middot; Free to use &middot; Not open source.</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+}
+</script>
+</body>
+</html>
