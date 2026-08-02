@@ -98,13 +98,34 @@
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
                 if (!e.isIntersecting) return;
-                e.target.classList.add('visible');
-                each('[data-count]', e.target, countUp);
+                show(e.target);
                 io.unobserve(e.target);
             });
         }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
 
         each('.fade-in', document, function (el) { io.observe(el); });
+
+        /* Failsafe. This is a documentation site, so content must never end up
+         * permanently invisible because a decorative animation did not run --
+         * which is exactly what happens if the observer never fires (a context
+         * that is not compositing, a background tab that never paints, an
+         * embedded webview). Anything still hidden after a beat is shown
+         * outright. Elements already revealed by the observer are untouched. */
+        setTimeout(function () {
+            each('.fade-in:not(.visible)', document, function (el) {
+                // Hard reveal: .visible alone only sets the transition's end
+                // state, and in a context that never paints the transition
+                // never advances either -- so the element would stay at
+                // opacity 0. .fade-in-now drops the transition entirely.
+                el.classList.add('fade-in-now');
+                show(el);
+            });
+        }, 1600);
+    }
+
+    function show(el) {
+        el.classList.add('visible');
+        each('[data-count]', el, countUp);
     }
 
     /* ── Count-up for any numeric stat that opts in with data-count ──────── */

@@ -1976,22 +1976,24 @@ body::after {
 .section-title {
     position: relative;
 }
+/* The framework centres .section-title, so the rule is centred too and grows
+   out from the middle. `translate` is the independent property, which composes
+   with the `transform` the animation drives rather than fighting it. */
 .section-title::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -0.6rem;
-    width: 54px;
+    left: 50%;
+    translate: -50% 0;
+    bottom: -0.55rem;
+    width: 58px;
     height: 2px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
     transform: scaleX(0);
-    transform-origin: 0 50%;
+    transform-origin: 50% 50%;
     transition: transform 0.7s cubic-bezier(.22,.61,.36,1) 0.15s;
 }
 .section-title.visible::after { transform: scaleX(1); }
-.section-title[style*="center"]::after,
-.section[style*="center"] .section-title::after { left: 50%; transform-origin: 50% 50%; translate: -50% 0; }
 
 /* ── Docs sidebar: mark the section you are actually reading ── */
 .docs-toc a {
@@ -2021,6 +2023,19 @@ body::after {
 }
 .docs-table tbody tr:hover {
     background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+/* Hard reveal, used by the motion script's failsafe and by print. Content on a
+   docs site must never stay hidden because an animation did not run. */
+.fade-in.fade-in-now {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+@media print {
+    .fade-in { opacity: 1 !important; transform: none !important; }
+    .scroll-progress { display: none !important; }
 }
 
 /* ── Reduced motion: everything above collapses to a static page ── */
