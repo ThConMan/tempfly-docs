@@ -9,7 +9,9 @@
     --border-light: rgba(96, 132, 176, 0.85);
     --glass: rgba(255, 255, 255, 0.03);
     --text: #eaf4fb;
-    --text-muted: #9bb2c8;
+    --text-muted: #c2d3e2;
+    /* Raised well past the AA floor: light-on-dark body copy near the
+       minimum reads as washed-out grey rather than merely legible. */
     --accent: #55DDFF;
     --accent-light: #9BE7FF;
     --accent-glow: rgba(85, 221, 255, 0.22);
