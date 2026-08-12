@@ -138,3 +138,11 @@ body {
     font-weight: 800;
 }
 .section-subtitle { text-shadow: none; }
+
+/* Real Minecraft item art for the feature cards. */
+.mc-feather   { background-image: url("../icons/feather.svg"); }
+.mc-clock     { background-image: url("../icons/clock.svg"); }
+.mc-elytra    { background-image: url("../icons/elytra.svg"); }
+.mc-barrel    { background-image: url("../icons/barrel.svg"); }
+.mc-hay_block { background-image: url("../icons/hay_block.svg"); }
+.mc-barrier   { background-image: url("../icons/barrier.svg"); }

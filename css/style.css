@@ -2050,3 +2050,21 @@ body::after {
     .section-title::after { transform: scaleX(1); }
     .scroll-progress { display: none; }
 }
+
+/* --- real Minecraft item art -----------------------------------------------
+   The feature glyphs are the game's own textures, extracted from the client
+   jar and embedded in SVG: flat items are the raw 16x16, solid blocks are
+   projected onto an isometric cube with vanilla face shading baked in. Drawn
+   pixelated on purpose - smoothing a 16x16 texture is what makes a Minecraft
+   site look cheap. */
+.mc {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    image-rendering: pixelated;
+}
+/* A flat item leaves a margin in its tile; a block fills more of it, exactly
+   as it does in a real inventory slot. */
+.feature-icon-wrap .mc { width: 32px; height: 32px; }
+.feature-icon-wrap .mc.block { width: 40px; height: 40px; }
